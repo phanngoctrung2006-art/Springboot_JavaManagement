@@ -66,4 +66,12 @@ public class UserService implements IUserService {
 	public Page<User> findAll(Pageable pageable) {
 		return userRepository.findAll(pageable);
 	}
+	@Override
+	public boolean login(String username, String password) {
+		User user = userRepository.findByUsername(username).stream().findFirst().orElse(null);
+		if (user != null && user.getPassword().equals(password)) {
+			return true;
+		}
+		return false;
+	}
 }

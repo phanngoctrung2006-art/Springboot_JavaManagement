@@ -17,4 +17,5 @@ public interface IUserService {
 	Page<User> findAll(Pageable pageable);
 	void save(User user);
 	void update(User user);
+	boolean login(String username, String password);
 }
