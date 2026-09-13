@@ -12,7 +12,9 @@ public interface IUserService {
 	long count();
 	List<User> findAll();
 	List<User> findByUsername(String username);
-	Page <User> findByUsernameContaining(String username, Pageable pageable);
+	Page<User> findByUsernameContaining(String username, Pageable pageable);
+	User findById(Long id);
+	Page<User> findAll(Pageable pageable);
 	void save(User user);
 	void update(User user);
 }

@@ -83,12 +83,15 @@ StandardCopyOption.REPLACE_EXISTING);
  } 
  @Override 
  public void delete(String storeFilename) throws Exception { 
-  Path destinationFile = 
-rootLocation.resolve(Paths.get(storeFilename)).normalize().toAbsolutePath(); 
-  if (Files.exists(destinationFile)) {
-   Files.delete(destinationFile); 
+  if (storeFilename == null || storeFilename.trim().isEmpty() || storeFilename.startsWith("http://") || storeFilename.startsWith("https://")) {
+   return;
   }
-   
+  try {
+   Path destinationFile = rootLocation.resolve(Paths.get(storeFilename)).normalize().toAbsolutePath(); 
+   if (Files.exists(destinationFile)) {
+    Files.delete(destinationFile); 
+   }
+  } catch (Exception ignored) {}
  } 
  @Override 
  public void init() { 

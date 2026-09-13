@@ -135,7 +135,9 @@ public class CategoryController {
 	        if (category.getCategoryid() != null) {
 	            Category existing = categoryService.findById(category.getCategoryid());
 	            if (existing != null && StringUtils.hasText(existing.getIcon())) {
-	                fileSystemStorageService.delete(existing.getIcon());
+	                try {
+	                    fileSystemStorageService.delete(existing.getIcon());
+	                } catch (Exception ignored) {}
 	            }
 	        }
 	        String iconUrl = fileSystemStorageService.getStorageFilename(iconFile, "category-icons");
